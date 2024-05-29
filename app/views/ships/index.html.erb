@@ -1,0 +1,7 @@
+<h1>Spaceships</h1>
+<%= link_to 'New Spaceship', new_ship_path %>
+<ul>
+  <% @ships.each do |ship| %>
+    <li><%= ship.name %> - <%= ship.description %></li>
+  <% end %>
+</ul>
