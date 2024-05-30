@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_025722) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_183306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "ship_id", null: false
+    t.bigint "user_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.decimal "total_cost", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ship_id"], name: "index_bookings_on_ship_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_ships", id: false, force: :cascade do |t|
+    t.bigint "ship_id", null: false
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_categories_ships_on_category_id"
+    t.index ["ship_id"], name: "index_categories_ships_on_ship_id"
+  end
 
   create_table "ships", force: :cascade do |t|
     t.string "name"
@@ -23,6 +48,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_025722) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "capacity"
+    t.string "location"
     t.index ["user_id"], name: "index_ships_on_user_id"
   end
 
@@ -38,5 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_025722) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "ships"
+  add_foreign_key "bookings", "users"
   add_foreign_key "ships", "users"
 end
