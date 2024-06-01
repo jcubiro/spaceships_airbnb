@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'ships#index'
-  resources :ships, only: %i[index new create]
+  resources :ships, only: %i[index new create show]
+  resources :bookings, only: %i[new index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

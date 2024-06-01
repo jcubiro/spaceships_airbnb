@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 p-2">
+      <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded shadow-lg img-fluid') %>
+    </div>
+    <div class="col-12 col-md-6">
+      <h1><%= @ship.name %></h1>
+      <p><%= @ship.description %></p>
+      <ul class="list-unstyled">
+        <li><strong>Price per Day:</strong> $<%= number_with_precision(@ship.price_per_day, precision: 2) %></li>
+        <li><strong>Capacity:</strong> <%= @ship.capacity %> people</li>
+        <li><strong>Location:</strong> <%= @ship.location %></li>
+        <li><strong>Available From:</strong> <%= @ship.available_from.strftime("%B %d, %Y") %></li>
+        <li><strong>Available To:</strong> <%= @ship.available_to.strftime("%B %d, %Y") %></li>
+      </ul>
+      <%= link_to 'Book Now', new_booking_path(ship_id: @ship.id), class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
