@@ -11,7 +11,5 @@ class Ship < ApplicationRecord
     'Rome', 'San Marino', 'Sarajevo', 'Stockholm', 'Tallinn', 'Vienna', 'Zagreb'
   ]
 
-  validates :name, :description, :capacity, :price_per_day, :location, :available_from, :available_to, presence: true
-  validates :capacity, numericality: { only_integer: true, greater_than_or_equal_to: 4, less_than_or_equal_to: 20 }
-  validates :location, inclusion: { in: AIRPORTS, message: "%<value> is not a valid airport" }
+  validates :name, :description, :capacity, :price_per_day, :available_from, :available_to, presence: true
 end

@@ -10,21 +10,17 @@ class ShipsController < ApplicationController
   end
 
   def create
-    @ship = current_user.ships.build(ship_params)
-    if @ship.save
-      redirect_to ships_path, notice: 'Ship was successfully created.'
+    ship = current_user.ships.build(ship_params)
+    if ship.save
+      redirect_to root_path, notice: 'Ship was successfully created.'
     else
-      render :new
+      render :new, alert: ship.errors.full_messages.to_sentence
     end
   end
 
   def show; end
 
   private
-
-  def ship_params
-    params.require(:ship).permit(:name, :description, :price_per_day, :available_from, :available_to)
-  end
 
   def find_ship
     @ship = Ship.find(params[:id])
