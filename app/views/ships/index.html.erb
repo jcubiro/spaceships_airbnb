@@ -2,6 +2,6 @@
 <%= link_to 'New Spaceship', new_ship_path %>
 <ul>
   <% @ships.each do |ship| %>
-    <li><%= ship.name %> - <%= ship.description %></li>
+    <li><%= link_to ship.name, ship_path(ship.id) %></li>
   <% end %>
 </ul>

@@ -1,6 +1,6 @@
 class ShipsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-
+  before_action :find_ship, only: :show
   def index
     @ships = Ship.all
   end
@@ -18,9 +18,15 @@ class ShipsController < ApplicationController
     end
   end
 
+  def show; end
+
   private
 
   def ship_params
     params.require(:ship).permit(:name, :description, :price_per_day, :available_from, :available_to)
+  end
+
+  def find_ship
+    @ship = Ship.find(params[:id])
   end
 end
