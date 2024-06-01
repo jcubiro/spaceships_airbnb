@@ -1,0 +1,29 @@
+<div class="container">
+<h1 class="h3">Book the <%= @ship.name %></h1>
+<%= form_with(model: [@ship, @booking], local: true, class: 'form-horizontal') do |form| %>
+  <% if @booking.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>Please check the following errors:</h4>
+      <ul>
+        <% @booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :start_date, class: 'form-label' %>
+    <%= form.date_field :start_date, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :end_date, class: 'form-label' %>
+    <%= form.date_field :end_date, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Book Now', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+</div>

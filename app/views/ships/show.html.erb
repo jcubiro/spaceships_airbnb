@@ -13,7 +13,7 @@
         <li><strong>Available From:</strong> <%= @ship.available_from.strftime("%B %d, %Y") %></li>
         <li><strong>Available To:</strong> <%= @ship.available_to.strftime("%B %d, %Y") %></li>
       </ul>
-      <%= link_to 'Book Now', new_booking_path(ship_id: @ship.id), class: 'btn btn-primary' %>
+      <%= link_to 'Book This Ship', new_ship_booking_path(@ship), class: 'btn btn-success' %>
     </div>
   </div>
 </div>

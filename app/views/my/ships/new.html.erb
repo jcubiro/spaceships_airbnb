@@ -1,0 +1,36 @@
+<div class="container">
+<h1>New Spaceship</h1>
+  <%= form_with(model: @ship, url: my_ships_path, local: true) do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+    <div>
+      <%= form.label :capacity %>
+      <%= form.number_field :capacity %>
+    </div>
+    <div>
+      <%= form.label :price_per_day %>
+      <%= form.number_field :price_per_day %>
+    </div>
+    <div>
+      <%= form.label :location %>
+      <%= form.select :location, options_for_select(Ship::AIRPORTS) %>
+    </div>
+    <div>
+      <%= form.label :available_from %>
+      <%= form.date_select :available_from %>
+    </div>
+    <div>
+      <%= form.label :available_to %>
+      <%= form.date_select :available_to %>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

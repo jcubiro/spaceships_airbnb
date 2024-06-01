@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="container">
+    <h1 class="h2">Your listed spaceships</h1>
+  <ul>
+    <% @ships.each do |ship| %>
+      <li><%= link_to ship.name, ship_path(ship.id) %></li>
+    <% end %>
+  </ul>
+</div>
