@@ -1,6 +1,7 @@
 class ShipsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :find_ship, only: :show
+
   def index
     @ships = Ship.all
   end
@@ -28,5 +29,9 @@ class ShipsController < ApplicationController
 
   def find_ship
     @ship = Ship.find(params[:id])
+  end
+
+  def set_airports
+    @airports = Ship::AIRPORTS
   end
 end

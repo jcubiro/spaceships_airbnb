@@ -1,0 +1,11 @@
+<%= simple_form_for @ship do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :capacity %>
+  <%= f.input :price_per_day %>
+  <%= f.input :available_from, as: :string, input_html: { class: 'flatpickr' } %>
+  <%= f.input :available_to, as: :string, input_html: { class: 'flatpickr' } %>
+  <%= f.input :location, collection: @airports, prompt: 'Select an Airport' %>
+
+  <%= f.submit %>
+<% end %>
