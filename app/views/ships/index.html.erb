@@ -1,7 +1,24 @@
-<h1>Spaceships</h1>
-<%= link_to 'New Spaceship', new_ship_path %>
-<ul>
-  <% @ships.each do |ship| %>
-    <li><%= link_to ship.name, ship_path(ship.id) %></li>
+<div class="container">
+  <% if current_user.nil? %>
+  <div class="px-4 py-5 my-5 text-center">
+    <%= image_tag('rocket_logo.png', alt: 'Spaceship', class: 'd-block mx-auto mb-4', width: '72', height: '57') %>
+    <h1 class="display-5 fw-bold text-body-emphasis">Spacebnb</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Welcome aboard SpacBnB, your gateway to the stars! ✨
+        Find the perfect spaceship for your journey. Explore new planets, star systems, and experiences beyond the ordinary, all from the comfort of a spaceship that feels like home.</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <%= link_to "Login", new_user_session_path, class: "btn btn-lg btn-dark px-4 gap-3" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-lg btn-primary px-4" %>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  <div class="container">
+    <h1 class="h2">Explore Spaceships</h1>
+  <ul>
+    <% @ships.each do |ship| %>
+      <li><%= link_to ship.name, ship_path(ship.id) %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
+</div>
