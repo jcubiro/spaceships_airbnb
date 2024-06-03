@@ -10,3 +10,71 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+// Body styling
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Navigation styling
+nav {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+// Navigation list styling
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+// Navigation link styling
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+// Footer styling
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+// Home page heading styling
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+// Home page paragraph styling
+p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+// Link styling
+a {
+  display: block;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  width: fit-content;
+}
+
+// Link hover styling
+a:hover {
+  background-color: #555;
+}
