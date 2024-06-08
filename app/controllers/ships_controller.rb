@@ -45,4 +45,8 @@ class ShipsController < ApplicationController
   def find_ship
     @ship = Ship.find(params[:id])
   end
+
+  def set_airports
+    @airports = Ship::AIRPORTS
+  end
 end

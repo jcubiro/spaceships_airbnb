@@ -2,8 +2,14 @@ Rails.application.routes.draw do
   # Devise routes for user authentication
   devise_for :users
 
-  # Root route
-  root to: 'pages#home'
+  root to: 'ships#index'
+  resources :ships, only: %i[index show new edit] do
+    resources :bookings, only: [:new, :create]
+  end
+  namespace :my do
+    resources :ships, only: %i[new create index new edit]
+    resources :bookings, only: %i[index]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
