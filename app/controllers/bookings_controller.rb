@@ -1,30 +1,48 @@
 class BookingsController < ApplicationController
-  before_action :set_ship, only: [:new, :create]
-  before_action :authenticate_user! # Assuming you are using something like Devise for user authentication
+  before_action :authenticate_user!
+  before_action :set_booking, only: %i[edit update destroy]
+  before_action :set_ship, only: %i[new create]
 
   def new
-    @booking = Booking.new
+    @booking = @ship.bookings.build
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @booking = @ship.bookings.build(booking_params)
     @booking.user = current_user
-    @booking.ship = @ship
-
     if @booking.save
-      redirect_to my_bookings_path, notice: 'Booking was successfully created.'
+      redirect_to @ship, notice: 'Booking was successfully created.'
     else
       render :new
     end
   end
 
+  def edit; end
+
+  def update
+    if @booking.update(booking_params)
+      redirect_to @booking.ship, notice: 'Booking was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @booking.destroy
+    redirect_to @booking.ship, notice: 'Booking was successfully deleted.'
+  end
+
   private
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
 
   def set_ship
     @ship = Ship.find(params[:ship_id])
   end
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(%i[start_date end_date ship_id])
   end
 end

@@ -1,6 +1,6 @@
 class ShipsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :find_ship, only: :show
+  before_action :find_ship, only: [:show, :edit, :update, :destroy]
 
   def index
     @ships = Ship.all
@@ -17,6 +17,21 @@ class ShipsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit; end
+
+  def update
+    if @ship.update(ship_params)
+      redirect_to @ship, notice: 'Ship was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @ship.destroy
+    redirect_to ships_path, notice: 'Ship was successfully deleted.'
   end
 
   def show; end
