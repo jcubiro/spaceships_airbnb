@@ -1,7 +1,8 @@
 class Ship < ApplicationRecord
+  include PgSearch::Model
+
   belongs_to :user
   has_many :bookings, dependent: :destroy
-
   has_and_belongs_to_many :categories
 
   AIRPORTS = [
@@ -14,6 +15,11 @@ class Ship < ApplicationRecord
   validates :name, :description, :capacity, :price_per_day, :available_from, :available_to, presence: true
   validates :price_per_day, numericality: { greater_than: 0 }
   validate :available_dates_valid
+
+  pg_search_scope :search_by_description, against: :description
+
+  scope :filter_by_capacity, ->(capacity) { where("capacity >= ?", capacity) }
+  scope :filter_by_category, ->(category_id) { joins(:categories).where(categories: { id: category_id }) }
 
   private
 
