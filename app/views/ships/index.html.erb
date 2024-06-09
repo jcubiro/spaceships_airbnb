@@ -13,12 +13,25 @@
     </div>
   </div>
   <% else %>
-  <div class="container">
-    <h1 class="h2">Explore Spaceships</h1>
-  <ul>
-    <% @ships.each do |ship| %>
-      <li><%= link_to ship.name, ship_path(ship.id) %></li>
-    <% end %>
-  </ul>
+    <div class="container">
+      <h1 class="h2">Explore Spaceships</h1>
+      <%= form_with url: ships_path, method: :get, local: true do %>
+        <%= label_tag :capacity, "Capacity" %>
+        <%= number_field_tag :capacity, params[:capacity], min: 4, max: 20 %>
+
+        <%= label_tag :category_id, "Category" %>
+        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), prompt: 'Select a Category' %>
+
+        <%= label_tag :keyword, "Keyword" %>
+        <%= text_field_tag :keyword, params[:keyword] %>
+
+        <%= submit_tag "Search" %>
+      <% end %>
+      <ul>
+        <% @ships.each do |ship| %>
+          <li><%= link_to ship.name, ship_path(ship.id) %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 </div>
