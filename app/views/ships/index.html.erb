@@ -13,25 +13,61 @@
     </div>
   </div>
   <% else %>
-    <div class="container">
-      <h1 class="h2">Explore Spaceships</h1>
-      <%= form_with url: ships_path, method: :get, local: true do %>
-        <%= label_tag :capacity, "Capacity" %>
-        <%= number_field_tag :capacity, params[:capacity], min: 4, max: 20 %>
+<div class="container">
+  <%= form_with url: ships_path, method: :get, local: true, html: { class: 'row bg-white p-4 rounded shadow-sm' } do |form| %>
+    <h1 class="h3 col-12">Browse Spaceships</h1>
 
-        <%= label_tag :category_id, "Category" %>
-        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), prompt: 'Select a Category' %>
-
-        <%= label_tag :keyword, "Keyword" %>
-        <%= text_field_tag :keyword, params[:keyword] %>
-
-        <%= submit_tag "Search" %>
-      <% end %>
-      <ul>
-        <% @ships.each do |ship| %>
-          <li><%= link_to ship.name, ship_path(ship.id) %></li>
-        <% end %>
-      </ul>
+    <!-- Capacity Field -->
+    <div class="form-group row col-12">
+      <%= label_tag :capacity, "Capacity", class: 'col-sm-3 col-form-label' %>
+      <div class="col-sm-9">
+        <%= number_field_tag :capacity, params[:capacity], min: 4, max: 20, class: 'form-control' %>
+      </div>
     </div>
+
+    <!-- Category Field -->
+    <div class="form-group row col-12 my-2">
+      <%= label_tag :category_id, "Category", class: 'col-sm-3 col-form-label' %>
+      <div class="col-sm-9">
+        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), prompt: 'Select a Category', class: 'form-control' %>
+      </div>
+    </div>
+
+    <!-- Keyword Field -->
+    <div class="form-group row col-12">
+      <%= label_tag :keyword, "Keyword", class: 'col-sm-3 col-form-label' %>
+      <div class="col-sm-9">
+        <%= text_field_tag :keyword, params[:keyword], class: 'form-control' %>
+      </div>
+    </div>
+
+    <!-- Search Button -->
+    <div class="form-group row col-12">
+      <div class="col-sm-offset-3 col-sm-9">
+        <%= submit_tag "Search", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="container mt-2">
+    <!-- Grid Row -->
+    <div class="row">
+      <% @ships.each do |ship| %>
+        <!-- Grid Column -->
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+          <!-- Card for each ship -->
+          <div class="card h-100 rounded">
+              <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'card-img-top') %>
+            <div class="card-body">
+              <%= link_to ship.name, ship_path(ship.id), class: 'text-dark fw-bold' %>
+              <p class="card-text"><%= ship.description[0...20] + '...' if ship.description.length > 20 %></p>
+              <p class="badge rounded-pill bg-dark"><%= ship.location %><p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
   <% end %>
 </div>

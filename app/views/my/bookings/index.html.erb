@@ -1,8 +1,18 @@
-<div class="container">
-<h1>My bookings</h1>
-<ul>
-  <% @bookings.each do |booking| %>
-  <li><%= booking.ship.name %> -- <%= booking.start_date %> to <%= booking.end_date %>
-  <% end %>
-</ul>
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary">My bookings</h1>
+    <ul class="list-group">
+      <% @bookings.each do |booking| %>
+        <li class="list-group-item d-flex mt-3">
+            <!-- Image Container -->
+              <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship',style: 'width: 100px;') %>
+            <!-- Details Container -->
+            <div class="flex-grow-1 ms-3">
+                <p class="mb-1"><%= booking.ship.name %></p>
+                <small class="small text-muted">Booked from <%= booking.start_date.strftime('%B %d, %Y') %> to <%= booking.end_date.strftime('%B %d, %Y') %></small>
+                <br>
+                <small class="small text-muted"><%= booking.ship.price_per_day %> € per day</small>
+            </div>
+        </li>
+      <% end %>
+    </ul>
 </div>

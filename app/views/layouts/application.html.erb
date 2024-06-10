@@ -11,8 +11,17 @@
   </head>
   <%= render partial: "shared/navigation" %>
   <body class="d-flex flex-column h-100">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice %>
+      <div class="alert alert-info text-center" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-warning text-center" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
    <%= render partial: "shared/footer" %>

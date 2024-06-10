@@ -19,7 +19,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_183306) do
     t.bigint "user_id", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
-    t.decimal "total_cost", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ship_id"], name: "index_bookings_on_ship_id"

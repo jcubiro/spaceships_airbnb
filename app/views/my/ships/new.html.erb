@@ -1,4 +1,46 @@
-<div class="container">
-  <h1>New Spaceship</h1>
-  <%= render 'form', airports: @airports %>
+<div class="container mt-5">
+  <h1 class="mb-4 h3">List your spaceship</h1>
+  <div class="row">
+    <!-- Left Column for Form -->
+    <div class="col-md-6">
+      <%= form_with(model: @ship, url: my_ships_path, local: true, html: { class: 'needs-validation' }) do |form| %>
+        <div class="mb-3">
+          <%= form.label :name, class: 'form-label' %>
+          <%= form.text_field :name, class: 'form-control', required: true %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :description, class: 'form-label' %>
+          <%= form.text_area :description, class: 'form-control', rows: 3, required: true %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :capacity, class: 'form-label' %>
+          <%= form.number_field :capacity, class: 'form-control', required: true %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :price_per_day, class: 'form-label' %>
+          <%= form.number_field :price_per_day, class: 'form-control', required: true %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :location, class: 'form-label' %>
+          <%= form.select :location, options_for_select(Ship::AIRPORTS), {}, { class: 'form-select' } %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :available_from, class: 'form-label' %>
+          <%= form.date_select :available_from %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :available_to, class: 'form-label' %>
+          <%= form.date_select :available_to %>
+        </div>
+        <div>
+          <%= form.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Right Column for Spaceship Image or Illustration -->
+    <div class="col-md-6 d-flex align-items-center">
+      <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded shadow-lg img-fluid') %>
+    </div>
+  </div>
 </div>

@@ -17,7 +17,7 @@
             </div>
         <% else %>
           <div class="text-end">
-            <button type="button" class="btn btn-dark">My bookings</button>
+            <%= link_to "My bookings", my_bookings_path, class: "btn btn-dark me-2" %>
             <%= link_to "List my Spaceship", new_my_ship_path, class: 'btn btn-primary' %>
           </div>
         <% end %>

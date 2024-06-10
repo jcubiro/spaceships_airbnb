@@ -11,7 +11,7 @@ class BookingsController < ApplicationController
     @booking = @ship.bookings.build(booking_params)
     @booking.user = current_user
     if @booking.save
-      redirect_to @ship, notice: 'Booking was successfully created.'
+      redirect_to my_bookings_path, notice: 'Booking was successfully created.'
     else
       render :new
     end
