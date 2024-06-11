@@ -1,10 +1,17 @@
-<div class="container">
+<div class="container mt-5">
+  <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/ships" class="link-decoration-none">Spaceships</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @ship.name %></li>
+  </ol>
+</nav>
+
   <div class="row">
-    <div class="col-12 col-md-6 p-2">
-      <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded shadow-lg img-fluid') %>
+    <div class="col-12 col-md-6 p-4">
+      <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded-4 shadow-lg img-fluid') %>
     </div>
-    <div class="col-12 col-md-6">
-      <h1><%= @ship.name %></h1>
+    <div class="col-12 col-md-6 p-4">
+      <h1 class="h3 fw-bold"><%= @ship.name %></h1>
       <p><%= @ship.description %></p>
       <ul class="list-unstyled">
         <li><strong>Price per Day:</strong> $<%= number_with_precision(@ship.price_per_day, precision: 2) %></li>
@@ -13,7 +20,7 @@
         <li><strong>Available From:</strong> <%= @ship.available_from.strftime("%B %d, %Y") %></li>
         <li><strong>Available To:</strong> <%= @ship.available_to.strftime("%B %d, %Y") %></li>
       </ul>
-      <%= link_to 'Book This Ship', new_ship_booking_path(@ship), class: 'btn btn-success' %>
+      <%= link_to 'Book This Ship', new_ship_booking_path(@ship), class: 'btn btn-primary rounded-4 fw-bold' %>
     </div>
   </div>
 </div>

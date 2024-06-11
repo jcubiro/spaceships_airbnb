@@ -1,8 +1,8 @@
 <div class="container mt-5">
-  <h1 class="mb-4 h3">List your spaceship</h1>
   <div class="row">
     <!-- Left Column for Form -->
-    <div class="col-md-6">
+    <div class="col-md-6 container bg-white p-5 rounded-4 shadow">
+      <h1 class="mb-4 h3 fw-bold text-secondary">List your spaceship</h1>
       <%= form_with(model: @ship, url: my_ships_path, local: true, html: { class: 'needs-validation' }) do |form| %>
         <div class="mb-3">
           <%= form.label :name, class: 'form-label' %>
@@ -39,7 +39,7 @@
     </div>
 
     <!-- Right Column for Spaceship Image or Illustration -->
-    <div class="col-md-6 d-flex align-items-center">
+    <div class="col-md-6 d-flex align-items-center p-5">
       <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded shadow-lg img-fluid') %>
     </div>
   </div>

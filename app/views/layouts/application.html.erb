@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   </head>
   <%= render partial: "shared/navigation" %>
-  <body class="d-flex flex-column h-100">
+  <body class="d-flex flex-column min-vh-100">
     <% if notice %>
       <div class="alert alert-info text-center" role="alert">
         <%= notice %>
@@ -21,7 +21,6 @@
         <%= alert %>
       </div>
     <% end %>
-
     <%= yield %>
   </body>
    <%= render partial: "shared/footer" %>
