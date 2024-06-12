@@ -1,15 +1,14 @@
 class ShipsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :find_ship, only: [:show, :edit, :update, :destroy]
-  before_action :set_airports, only: [:new, :edit, :create, :update]
+  before_action :set_airports, only: [:index]
   before_action :set_categories, only: [:index, :new, :edit]
 
   def index
     @ships = Ship.all
 
     @ships = filter_by_capacity(@ships, params[:capacity]) if params[:capacity].present?
-    @ships = filter_by_category(@ships, params[:category_id]) if params[:category_id].present?
-    @ships = filter_by_keyword(@ships, params[:keyword]) if params[:keyword].present?
+    @ships = filter_by_airport(@ships, params[:airport]) if params[:airport].present?
   end
 
   def new
@@ -40,7 +39,10 @@ class ShipsController < ApplicationController
     redirect_to ships_path, notice: 'Ship was successfully deleted.'
   end
 
-  def show; end
+  def show
+    @image = params[:image_id]
+    puts @image
+  end
 
   private
 
@@ -64,11 +66,7 @@ class ShipsController < ApplicationController
     ships.filter_by_capacity(capacity)
   end
 
-  def filter_by_category(ships, category_id)
-    ships.filter_by_category(category_id)
-  end
-
-  def filter_by_keyword(ships, keyword)
-    ships.search_by_description(keyword)
+  def filter_by_airport(ships, airport)
+    ships.filter_by_airport(airport)
   end
 end

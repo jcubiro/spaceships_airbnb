@@ -1,10 +1,31 @@
 <div class="container mt-5 min-vh-100">
   <div class="container">
     <h1 class="h3 fw-bold">Your listed spaceships</h1>
-  <ul>
-    <% @ships.each do |ship| %>
-      <li><%= link_to ship.name, ship_path(ship.id) %></li>
-    <% end %>
-  </ul>
+    <div class="row mt-3">
+      <% @ships.each_with_index do |ship, index| %>
+        <!-- Grid Column -->
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+          <!-- Card for each ship -->
+          <div class="card h-100 rounded-4 shadow border-none">
+            <% if ship.id >= 1 && ship.id <= 9 %>
+                <%= image_tag("#{ship.id}.png", alt: 'Spaceship', class: 'card-img-top rounded-top-4', style:'height: 250px;') %>
+            <% else %>
+              <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'card-img-top rounded-top-4', style:'height: 250px;') %>
+            <% end %>
+            <div class="card-body">
+              <%= link_to ship.name, ship_path(ship.id), class: 'text-dark fw-bold' %>
+              <p class="card-text"><%= ship.description[0...20] + '...' if ship.description.length > 20 %></p>
+              <p class="small text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+              </svg> <span class="text-secondary">Capacity:</span> <span class="text-dark"><%= ship.capacity %></span></p>
+                            <p class="small text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.3 1.3 0 0 0-.37.265.3.3 0 0 0-.057.09V14l.002.008.016.033a.6.6 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.6.6 0 0 0 .146-.15l.015-.033L12 14v-.004a.3.3 0 0 0-.057-.09 1.3 1.3 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465s-2.462-.172-3.34-.465c-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411"/>
+              </svg> <span class="text-secondary">This ship has been booked</span> <span class="text-dark"><%= ship.bookings.count %> times</span></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

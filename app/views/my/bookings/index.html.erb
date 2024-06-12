@@ -4,7 +4,11 @@
       <% @bookings.each do |booking| %>
         <li class="list-group-item d-flex mt-3">
             <!-- Image Container -->
+            <% if booking.ship.id >= 1 && booking.ship.id <= 9 %>
+                <%= image_tag("#{booking.ship.id}.png", alt: 'Spaceship',style: 'width: 100px;') %>
+            <% else %>
               <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship',style: 'width: 100px;') %>
+            <% end %>
             <!-- Details Container -->
             <div class="flex-grow-1 ms-3">
                 <p class="mb-1"><%= booking.ship.name %></p>

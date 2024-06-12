@@ -8,7 +8,11 @@
 
   <div class="row">
     <div class="col-12 col-md-6 p-4">
-      <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'rounded-4 shadow-lg img-fluid') %>
+      <% if @ship.id >= 1 && @ship.id <= 9 %>
+          <%= image_tag("#{@ship.id}.png", alt: 'Spaceship', class: 'card-img-top rounded-top-4') %>
+      <% else %>
+          <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'card-img-top rounded-top-4') %>
+      <% end %>
     </div>
     <div class="col-12 col-md-6 p-4">
       <h1 class="h3 fw-bold"><%= @ship.name %></h1>

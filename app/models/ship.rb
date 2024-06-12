@@ -19,7 +19,7 @@ class Ship < ApplicationRecord
   pg_search_scope :search_by_description, against: :description
 
   scope :filter_by_capacity, ->(capacity) { where("capacity >= ?", capacity) }
-  scope :filter_by_category, ->(category_id) { joins(:categories).where(categories: { id: category_id }) }
+  scope :filter_by_airport, ->(location) { where("location = ?", location) }
 
   private
 
