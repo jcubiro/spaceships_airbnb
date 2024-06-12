@@ -1,31 +1,48 @@
-<div class="container w-50 mt-5 min-vh-100">
-<h1 class="h3">Book the <%= @ship.name %></h1>
-<div class="container bg-white p-5 rounded-4 shadow">
-<%= form_with(model: [@ship, @booking], local: true, class: 'form-horizontal') do |form| %>
-  <% if @booking.errors.any? %>
-    <div class="alert alert-danger">
-      <h4>Please check the following errors:</h4>
-      <ul>
-        <% @booking.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container mt-5 min-vh-100">
+  <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/ships" class="link-decoration-none">Spaceships</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to @ship.name, ship_path(@ship)%></li>
+    <li class="breadcrumb-item active" aria-current="page">Book the <%= @ship.name %></li>
+  </ol>
+</nav>
+
+  <div class="row">
+    <div class="col-12 col-md-6 p-4">
+      <% if @ship.id >= 1 && @ship.id <= 9 %>
+          <%= image_tag("#{@ship.id}.png", alt: 'Spaceship', class: 'card-img-top rounded-top-4') %>
+      <% else %>
+          <%= image_tag('spaceship_placeholder.jpeg', alt: 'Spaceship', class: 'card-img-top rounded-top-4') %>
+      <% end %>
     </div>
-  <% end %>
+    <div class="col-12 col-md-6 p-4">
+      <h1 class="h3 fw-bold"><%= @ship.name %> booking form</h1>
+      <%= form_with(model: [@ship, @booking], local: true, class: 'form-horizontal') do |form| %>
+        <% if @booking.errors.any? %>
+          <div class="alert alert-danger">
+            <h4>Please check the following errors:</h4>
+            <ul>
+              <% @booking.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <div class="mb-3">
-    <%= form.label :start_date, class: 'form-label' %>
-    <%= form.date_field :start_date, class: 'form-control' %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :start_date, class: 'form-label' %>
+          <%= form.date_field :start_date, class: 'form-control' %>
+        </div>
 
-  <div class="mb-3">
-    <%= form.label :end_date, class: 'form-label' %>
-    <%= form.date_field :end_date, class: 'form-control' %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :end_date, class: 'form-label' %>
+          <%= form.date_field :end_date, class: 'form-control' %>
+        </div>
 
-  <div class="actions">
-    <%= form.submit 'Book Now', class: 'btn btn-primary' %>
+        <div class="actions">
+          <%= form.submit 'Book Now', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-</div>
 </div>
